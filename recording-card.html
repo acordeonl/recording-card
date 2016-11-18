@@ -1,0 +1,340 @@
+<imports >
+    <link rel="import" href="../polymer/polymer.html">
+    <link rel="import" href="../paper-input/paper-input.html">
+    <link rel="import" href="../iron-collapse/iron-collapse.html">
+    <link rel="import" href="../paper-icon-button/paper-icon-button.html" async>
+    <link rel="import" href="../star-rating/star-rating.html" async>
+    <link rel="import" href="../paper-ripple/paper-ripple.html" async>
+    <link rel="import" href="../iron-icon/iron-icon.html" async >
+    <link rel="import" href="../iron-icons/iron-icons.html" async>
+</imports>
+<icon-imports >
+    <link rel="import" href="../iron-icons/hardware-icons.html" async>
+    <link rel="import" href="../iron-icons/social-icons.html" async>
+    <link rel="import" href="../iron-icons/image-icons.html" async>
+    <link rel="import" href="../iron-icons/av-icons.html" async>
+    <link rel="import" href="../iron-icons/communication-icons.html" async>
+</icon-imports>
+<!--
+
+Shows drop down menu (works on chrome)
+
+### Usage
+The list displayed in the drop down menu can be set as an attribute.
+
+    <drop-menu list-items='["first" ,"second"]'></drop-menu>
+
+For an overlayed drop menu:
+
+    <drop-menu overlay-menu list-items='["first" ,"second"]'></drop-menu>
+
+### Styling
+ Custom property | Description | Default
+----------------|-------------|----------
+`--item-background-color` | List item backround color | `#f1ecef`
+`--item-color` | List item color used for fonts | `#302f31`
+`--close-color` | Icon button hover color | `4775D1`
+`--content-background` | Drop menu's background color | `white`
+`--close-color` | Icon button hover color | `4775D1`
+`--icon-button` | Mixin applied the icon button | `{}`
+
+@demo demo/drop-menu-demo.html
+-->
+<dom-module id="recording-card">
+    <template>
+        <styles >
+            <style middle>
+                iron-icon {
+                    margin-bottom: 3px;
+                    color: #b7b2b6;
+                }
+                [middle] {
+                    color: var(--title-color);
+                    margin-top: 8px;
+                    font-size: 17px;
+                }
+            </style>
+            <style bottom>
+                paper-icon-button {
+                    background-color: var(--paper-icon-button-background);
+                    color: var(--content-background);
+                    border-radius: 100%;
+                    height: 41px;
+                    width: 41px;
+                }
+                paper-icon-button:hover {
+                    color: var(--close-color);
+                }
+                [bottom] {
+                    font-size: 20px;
+                    font-weight: 500;
+                    color: black;
+                    margin-left: 5px;
+                    width: 100%;
+                    @apply(--layout-center);
+                    @apply(--layout-horizontal);
+                    @apply(--layout-justified);
+                }
+                [score] {
+                    color: gray;
+                    font-weight: 300;
+                    font-size: 16px;
+                    width: 80%;
+                }
+                [info] {
+                    width: 20%;
+                    @apply(--layout-end-justified);
+                    @apply(--layout-horizontal);
+                }
+                [more] {
+                    margin-right: 0;
+                    margin-left: 0;
+                    background-color: var(--paper-icon-list-background);
+                    height: 41px;
+                    width: 41px;
+                    margin-top: 10px;
+                }
+                star-rating {
+                    --star-color: var(--close-color);
+                }
+                [votes] {
+                    color: (--title-color);
+                }
+            </style>
+            <style recordingInfo>
+                iron-collapse {
+                    width: 100%;
+                    margin-left: 5px;
+                }
+                [details] {
+                    margin-top: 10px;
+                    width: 100%;
+                    @apply(--layout-horizontal);
+                    @apply(--layout-justified);
+                }
+                [recordingInfo] {
+                    font-size: 16px;
+                    margin-left: 5px;
+                    margin-right: 30px;
+                    /*@apply(--justify-text);*/
+                }
+                [description] {
+                    padding: 12px;
+                    margin-right: 7px;
+                    margin-bottom: 5px;
+                    @apply(--justify-text);
+                    @apply(--layout-horizontal);
+                    @apply(--layout-justified);
+                }
+                [bold] {
+                    font-weight: 500;
+                }
+                paper-button {
+                    background-color: var(--close-color);
+                    color: white;
+                    margin-top: 20px;
+                    margin-left: 20px;
+                }
+                [extra-buttons] {
+                    @apply(--layout-center);
+                    @apply(--layout-vertical);
+                    @apply(--layout-justified);
+                    margin-top: 5px;
+                }
+                [extra-icon] {
+                    background-color: var(--paper-icon-list-background);
+                    height: 41px;
+                    width: 41px;
+                }
+            </style>
+            <style>
+                :host {}
+                [listItem] {
+                    font-size: 18px;
+                    margin-bottom: 20px;
+                    padding: 20px 20px 13px;
+                    border-radius: 4px;
+                    opacity: 0.8;
+                    background-color: var(--title-background);
+                    position: relative;
+                    @apply(--layout-vertical);
+                }
+                [listItem]:hover {
+                    opacity: 1;
+                }
+                [top] {
+                    font-size: 19px;
+                }
+                [clickArea] {
+                    @apply(--no-user-select);
+                    -webkit-tap-highlight-color:rgba(0,0,0,0);
+                    margin-left: 5px;
+                    cursor: pointer;
+                }
+                [clickArea][no-click]{
+                    cursor: default ;
+                }
+            </style>
+            <style dialog>
+                paper-input {
+                    --paper-input-container-label: {
+                        color: var(--title-color);
+                        font-size: 18px;
+                        font-weight: 300;
+                    };
+                    --paper-input-container-input: {
+                        color: var(--title-color);
+                        font-size: 20px;
+                        font-weight: 300;
+                    };
+                }
+            </style>
+        </styles>
+        <div listItem>
+            <div clickArea no-click$=[[noClick]] id="recording_{{recordingId}}" on-click="_playrecording">
+                <template is="dom-if" if="[[!noClick]]" >
+                    <paper-ripple></paper-ripple>
+                </template>
+                <div top>
+                    {{recordingTitle}}
+                </div>
+                <div middle>
+                    <iron-icon icon="social:person-outline"></iron-icon>
+                    {{recordingUser}}
+                    &nbsp
+                    <iron-icon icon="image:remove-red-eye"></iron-icon>
+                    {{recordingViews}}
+                    vistas
+                </div>
+            </div>
+            <div bottom>
+                <div score>
+                    <star-rating read-only rate="{{recordingScore}}">
+                        <div votes>
+                            &nbsp ({{recordingVotes}})
+                        </div>
+                    </star-rating>
+                </div>
+                <div info>
+                    <paper-icon-button id=[[icon1Id]] on-click='_action' more icon="expand-more"></paper-icon-button>
+                </div>
+            </div>
+            <iron-collapse id="collapse">
+                <div details>
+                    <div recordingInfo>
+                        <div property>
+                            <span bold>Fecha de publicaciòn:</span>&nbsp{{recordingDate}}
+                        </div>
+                        <div property>
+                            <span bold>Categoria:</span>&nbsp{{recordingCategory}}
+                        </div>
+                        <div property>
+                            <span bold>Duraciòn:</span>&nbsp{{recordingDuration}}
+                        </div>
+                        <div property>
+                            <span bold>Comentarios:</span>&nbsp{{recordingComments}}
+                        </div>
+                    </div>
+                    <div extra-buttons>
+                        <template is="dom-if" if="[[icon2]]">
+                            <paper-icon-button on-click='_action' id='[[icon2]]' icon='[[icon2]]' extra-icon></paper-icon-button>
+                        </template>
+                    </div>
+                </div>
+                <div description>
+                    {{recordingDescription}}
+                </div>
+            </iron-collapse>
+        </div>
+    </template>
+    <script>
+        Polymer({
+            is: "recording-card",
+            observers: [],
+            behaviors: [],
+            listeners: {},
+            properties: {
+                recordingId:{
+                    observer:'hideCollapse'
+                },
+                open:{
+                    type:Boolean,
+                    value:false
+                },
+                icon1Id: {
+                    type: String,
+                    value: 'expand-more'
+                },
+                noClick:{
+                    type:Boolean,
+                    value:false
+                },
+                icon1: {
+                    type: String
+                },
+                icon2: {
+                    type: String
+                },
+                id: {
+                    type: String,
+                    value: ""
+                }
+            },
+            _setIcon: function (id, icon) {
+                this.$$('#' + id).icon = icon;
+                this.icon1Id = icon;
+            },
+            hideCollapse: function(){
+                if(this.open){
+                    this.$.collapse.hide();
+                    this.open=false;
+                    this.$$('[more]').icon = 'expand-more';
+                    this.icon1Id = 'expand-more';
+                }
+            },
+            showDetails: function(){
+                this.open=true ;
+                this.$.collapse.show();
+                this.async(function () {
+                    this._setIcon('expand-more', this.icon1);
+                }, 50);
+            },
+            _action: function (e) {
+                // console.log("mirave"+ e.currentTarget.id);
+                if (e.currentTarget.id === 'expand-more') {
+                    this.showDetails() ;
+                }
+                if (e.currentTarget.id === 'delete' || e.currentTarget.id === 'icons:delete') {
+                    this.fire('delete-recording', {
+                        id: this.recordingId,
+                        name: this.recordingTitle
+                    });
+                }
+                if (e.currentTarget.id === 'editor:mode-edit' || e.currentTarget.id === 'icons:create' || e.currentTarget.id === 'create') {
+                    this.fire('edit-recording', {
+                        id: this.recordingId,
+                        name: this.recordingTitle,
+                        category:this.recordingCategory,
+                        description:this.recordingDescription
+                    });
+                }
+                if (e.currentTarget.id === 'av:playlist-add' || e.currentTarget.id === 'collection-add') {
+                    this.fire('addToCollection', {
+                        name: this.recordingTitle,
+                        id: this.recordingId
+                    });
+                    // this.$.dialog.open() ;
+                }
+            },
+            _playrecording: function (e) {
+                this.fire('play-recording', {id: e.currentTarget.id});
+            },
+            ready: function () {
+                Polymer.RenderStatus.afterNextRender(this, function () {
+                    this.$.collapse.hide();
+                    this.listen(this, 'select-collection', '_addToCollection');
+                });
+            }
+        });
+    </script>
+</dom-module>

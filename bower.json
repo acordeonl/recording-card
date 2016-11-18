@@ -1,0 +1,35 @@
+{
+  "name": "record-card",
+  "authors": [
+    "acordeonl <admin@acorde.onl>"
+  ],
+  "description": "",
+  "main": "record-card.html",
+  "keywords": [
+    "web-components",
+    "polymer"
+  ],
+  "license": "MIT",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "polymer": "Polymer/polymer#^1.0.0",
+    "paper-input": "PolymerElements/paper-input#^1.1.20",
+    "iron-collapse": "PolymerElements/iron-collapse#^1.2.1",
+    "paper-icon-button": "PolymerElements/paper-icon-button#^1.1.2",
+    "star-rating": "acordeonl/star-rating#^2.0.0",
+    "paper-ripple": "PolymerElements/paper-ripple#^1.0.9",
+    "iron-icons": "PolymerElements/iron-icons#^1.1.3",
+    "iron-icon": "PolymerElements/iron-icon#^1.0.12"
+  },
+  "devDependencies": {
+    "iron-component-page": "PolymerElements/iron-component-page#^1.1.7",
+    "iron-demo-helpers": "PolymerElements/iron-demo-helpers#^1.2.5"
+  }
+}
