@@ -1,10 +1,10 @@
 {
-  "name": "record-card",
+  "name": "recording-card",
   "authors": [
     "acordeonl <admin@acorde.onl>"
   ],
   "description": "",
-  "main": "record-card.html",
+  "main": "recording-card.html",
   "keywords": [
     "web-components",
     "polymer"
