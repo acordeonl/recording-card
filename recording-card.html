@@ -46,7 +46,8 @@ For an overlayed drop menu:
             <style middle>
                 iron-icon {
                     margin-bottom: 3px;
-                    color: #b7b2b6;
+                    /*color: #b7b2b6;*/
+                    color: var(--background-color0);
                 }
                 [middle] {
                     color: var(--title-color);
@@ -56,8 +57,8 @@ For an overlayed drop menu:
             </style>
             <style bottom>
                 paper-icon-button {
-                    background-color: var(--paper-icon-button-background);
-                    color: var(--content-background);
+                    background-color: var(--background-color1);
+                    color: var(--paper-icon-color);
                     border-radius: 100%;
                     height: 41px;
                     width: 41px;
@@ -89,7 +90,7 @@ For an overlayed drop menu:
                 [more] {
                     margin-right: 0;
                     margin-left: 0;
-                    background-color: var(--paper-icon-list-background);
+                    background-color: var(--background-color1);
                     height: 41px;
                     width: 41px;
                     margin-top: 10px;
@@ -98,7 +99,7 @@ For an overlayed drop menu:
                     --star-color: var(--close-color);
                 }
                 [votes] {
-                    color: (--title-color);
+                    color: var(--title-color);
                 }
             </style>
             <style recordingInfo>
@@ -142,20 +143,22 @@ For an overlayed drop menu:
                     margin-top: 5px;
                 }
                 [extra-icon] {
-                    background-color: var(--paper-icon-list-background);
+                    background-color: var(--background-color1);
                     height: 41px;
                     width: 41px;
                 }
             </style>
             <style>
-                :host {}
+                :host {
+                    color:var(--title-color0) ;
+                }
                 [listItem] {
                     font-size: 18px;
                     margin-bottom: 20px;
                     padding: 20px 20px 13px;
                     border-radius: 4px;
-                    opacity: 0.8;
-                    background-color: var(--title-background);
+                    opacity: 0.95;
+                    background-color: var(--background-color);
                     position: relative;
                     @apply(--layout-vertical);
                 }
