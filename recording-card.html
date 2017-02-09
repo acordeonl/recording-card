@@ -46,25 +46,24 @@ For an overlayed drop menu:
             <style middle>
                 iron-icon {
                     margin-bottom: 3px;
-                    /*color: #b7b2b6;*/
-                    color: var(--background-color0);
+                    color: var(--background-color0,#D7D3D1);
                 }
                 [middle] {
-                    color: var(--title-color);
+                    color: var(--title-color,#212121);
                     margin-top: 8px;
                     font-size: 17px;
                 }
             </style>
             <style bottom>
                 paper-icon-button {
-                    background-color: var(--background-color1);
-                    color: var(--paper-icon-color);
+                    background-color: var(--background-color1,#E5E1DF);
+                    color: var(--paper-icon-color,#fafafa);
                     border-radius: 100%;
                     height: 41px;
                     width: 41px;
                 }
                 paper-icon-button:hover {
-                    color: var(--close-color);
+                    color: var(--close-color,#4775D1);
                 }
                 [bottom] {
                     font-size: 20px;
@@ -90,16 +89,16 @@ For an overlayed drop menu:
                 [more] {
                     margin-right: 0;
                     margin-left: 0;
-                    background-color: var(--background-color1);
+                    background-color: var(--background-color1,#E5E1DF);
                     height: 41px;
                     width: 41px;
                     margin-top: 10px;
                 }
                 star-rating {
-                    --star-color: var(--close-color);
+                    --star-color: var(--close-color,#4775D1);
                 }
                 [votes] {
-                    color: var(--title-color);
+                    color: var(--title-color,#212121);
                 }
             </style>
             <style recordingInfo>
@@ -131,7 +130,7 @@ For an overlayed drop menu:
                     font-weight: 500;
                 }
                 paper-button {
-                    background-color: var(--close-color);
+                    background-color: var(--close-color,#4775D1);
                     color: white;
                     margin-top: 20px;
                     margin-left: 20px;
@@ -143,14 +142,14 @@ For an overlayed drop menu:
                     margin-top: 5px;
                 }
                 [extra-icon] {
-                    background-color: var(--background-color1);
+                    background-color: var(--background-color1,#E5E1DF);
                     height: 41px;
                     width: 41px;
                 }
             </style>
             <style>
                 :host {
-                    color:var(--title-color0) ;
+                    color:var(--title-color0,#1D1D1D) ;
                 }
                 [listItem] {
                     font-size: 18px;
@@ -158,7 +157,7 @@ For an overlayed drop menu:
                     padding: 20px 20px 13px;
                     border-radius: 4px;
                     opacity: 0.95;
-                    background-color: var(--background-color);
+                    background-color: var(--background-color,#efebe9);
                     position: relative;
                     @apply(--layout-vertical);
                 }
@@ -181,12 +180,12 @@ For an overlayed drop menu:
             <style dialog>
                 paper-input {
                     --paper-input-container-label: {
-                        color: var(--title-color);
+                        color: var(--title-color,#212121);
                         font-size: 18px;
                         font-weight: 300;
                     };
                     --paper-input-container-input: {
-                        color: var(--title-color);
+                        color: var(--title-color,#212121);
                         font-size: 20px;
                         font-weight: 300;
                     };
