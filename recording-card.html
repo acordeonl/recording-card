@@ -254,7 +254,7 @@ For an overlayed drop menu:
             is: "recording-card",
             observers: [],
             behaviors: [],
-            listeners: {},
+            listeners: {'select-collection':'_addToCollection'},
             properties: {
                 recordingId:{
                     observer:'hideCollapse'
@@ -330,12 +330,6 @@ For an overlayed drop menu:
             },
             _playrecording: function (e) {
                 this.fire('play-recording', {id: e.currentTarget.id});
-            },
-            ready: function () {
-                Polymer.RenderStatus.afterNextRender(this, function () {
-                    this.$.collapse.hide();
-                    this.listen(this, 'select-collection', '_addToCollection');
-                });
             }
         });
     </script>
