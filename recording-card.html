@@ -2,18 +2,18 @@
     <link rel="import" href="../polymer/polymer.html">
     <link rel="import" href="../paper-input/paper-input.html">
     <link rel="import" href="../iron-collapse/iron-collapse.html">
-    <link rel="import" href="../paper-icon-button/paper-icon-button.html" async>
-    <link rel="import" href="../star-rating/star-rating.html" async>
-    <link rel="import" href="../paper-ripple/paper-ripple.html" async>
-    <link rel="import" href="../iron-icon/iron-icon.html" async >
-    <link rel="import" href="../iron-icons/iron-icons.html" async>
+    <link rel="import" href="../paper-icon-button/paper-icon-button.html">
+    <link rel="import" href="../star-rating/star-rating.html">
+    <link rel="import" href="../paper-ripple/paper-ripple.html">
+    <link rel="import" href="../iron-icon/iron-icon.html" >
+    <link rel="import" href="../iron-icons/iron-icons.html">
 </imports>
 <icon-imports >
-    <link rel="import" href="../iron-icons/hardware-icons.html" async>
-    <link rel="import" href="../iron-icons/social-icons.html" async>
-    <link rel="import" href="../iron-icons/image-icons.html" async>
-    <link rel="import" href="../iron-icons/av-icons.html" async>
-    <link rel="import" href="../iron-icons/communication-icons.html" async>
+    <link rel="import" href="../iron-icons/hardware-icons.html">
+    <link rel="import" href="../iron-icons/social-icons.html">
+    <link rel="import" href="../iron-icons/image-icons.html">
+    <link rel="import" href="../iron-icons/av-icons.html">
+    <link rel="import" href="../iron-icons/communication-icons.html">
 </icon-imports>
 <!--
 
@@ -225,16 +225,25 @@ For an overlayed drop menu:
                 <div details>
                     <div recordingInfo>
                         <div property>
+                            <span bold>Grabada con:</span>&nbsp{{recordingAcView}}:
+                            <template is="dom-if" if="[[recordingPolyphonic]]">
+                               Polifónico
+                            </template>
+                            <template is="dom-if" if="[[!recordingPolyphonic]]">
+                                Monofónico
+                            </template>
+                        </div>
+                        <div property>
                             <span bold>Fecha de publicaciòn:</span>&nbsp{{recordingDate}}
                         </div>
                         <div property>
                             <span bold>Categoria:</span>&nbsp{{recordingCategory}}
                         </div>
                         <div property>
-                            <span bold>Duraciòn:</span>&nbsp{{recordingDuration}}
+                            <span bold>Comentarios:</span>&nbsp{{recordingComments}}
                         </div>
                         <div property>
-                            <span bold>Comentarios:</span>&nbsp{{recordingComments}}
+                            <span bold>Duración:</span>&nbsp{{recordingDuration}}
                         </div>
                     </div>
                     <div extra-buttons>
